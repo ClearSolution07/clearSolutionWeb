@@ -1,0 +1,215 @@
+.testimonials {
+  padding: clamp(1.5rem, 5vw, 3rem) clamp(1rem, 3vw, 2rem);
+  background: #000000;
+  color: white;
+  min-height: min(100vh, 800px);
+  overflow: hidden;
+  position: relative;
+}
+
+.testimonials .section-heading-wrapper {
+  max-width: min(90%, 300px);
+  width: 100%;
+  margin: 0 auto clamp(-2rem, -4vh, -1.5rem);
+}
+
+.testimonials-header {
+  text-align: center;
+  margin-bottom: clamp(2rem, 6vh, 4rem);
+  padding: 0 5%;
+}
+
+.testimonials-header h2 {
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 600;
+  margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+  line-height: 1.2;
+}
+
+.testimonials-header p {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: #a3a3a3;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.testimonials-rows {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vh, 2rem);
+  max-width: min(95%, 1400px);
+  margin: 0 auto;
+}
+
+.testimonials-track {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2rem);
+  width: max-content;
+  padding: clamp(0.5rem, 2vh, 1rem) 0;
+  will-change: transform;
+}
+
+.testimonials-track.left-to-right {
+  animation: scrollLeft calc(95s * 0.8) linear infinite;
+}
+
+.testimonials-track.right-to-left {
+  animation: scrollRight calc(95s * 0.8) linear infinite;
+}
+
+/* Add pause on hover for the track */
+.testimonials-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.testimonial-card {
+  background: #1a1a1a;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border-radius: clamp(8px, 1.5vw, 16px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.5vh, 1rem);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  width: min(90vw, 400px);
+  min-width: 280px;
+  height: auto;
+  min-height: 180px;
+  flex-shrink: 0;
+}
+
+.testimonial-card:hover {
+  transform: translateY(clamp(-3px, -0.5vh, -5px));
+  background: #222222;
+  border-color: rgba(204, 0, 3, 0.3);
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1.5vw, 0.75rem);
+}
+
+.author-avatar {
+  width: clamp(32px, 4vw, 40px);
+  height: clamp(32px, 4vw, 40px);
+  background: #CC0003;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(0.8rem, 1.5vw, 1rem);
+  font-weight: 600;
+  color: white;
+}
+
+.author-info h4 {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  font-weight: 500;
+  color: white;
+  margin-bottom: 0.15rem;
+}
+
+.author-info p {
+  font-size: clamp(0.75rem, 1.5vw, 0.85rem);
+  color: #a3a3a3;
+}
+
+.testimonial-text {
+  color: #a3a3a3;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  line-height: 1.5;
+  text-align: justify;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  hyphens: auto;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .testimonials-track {
+    animation-duration: calc(95s * 0.7);
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonials {
+    min-height: min(100vh, 700px);
+  }
+
+  .testimonials-track {
+    animation-duration: calc(95s * 0.6);
+    gap: 1.5rem;
+  }
+
+  .testimonial-card {
+    min-width: 260px;
+    min-height: 160px;
+  }
+}
+
+@media (max-width: 480px) {
+  .testimonials {
+    padding: 1.5rem 1rem;
+    min-height: min(100vh, 600px);
+  }
+
+  .testimonials-track {
+    animation-duration: calc(95s * 0.5);
+    gap: 1rem;
+  }
+
+  .testimonial-card {
+    min-width: 240px;
+    padding: 1rem;
+  }
+
+  .testimonial-text {
+    -webkit-line-clamp: 2;
+  }
+}
+
+/* Touch devices */
+@media (hover: none) {
+  .testimonials-track:hover {
+    animation-play-state: running;
+  }
+  
+  .testimonial-card:hover {
+    transform: none;
+  }
+}
+
+/* Orientation adjustments */
+@media (orientation: portrait) {
+  .testimonials-track {
+    animation-duration: calc(95s * 0.75);
+  }
+}
+
+/* High density screens */
+@media (min-resolution: 120dpi) {
+  .testimonial-card {
+    border-width: 0.5px;
+  }
+}
+
+/* 2K+ screens */
+@media (min-width: 1920px) {
+  .testimonials-track {
+    animation-duration: 110s;
+  }
+}

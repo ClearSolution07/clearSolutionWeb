@@ -1,0 +1,128 @@
+.products-page1 {
+  background: #000000;
+  color: white;
+  min-height: 100vh;
+}
+
+.products-content1 {
+  max-width: min(1400px, 95%);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 3vw, 2rem);
+  margin-top: clamp(2rem, 5vw, 4.5rem);
+}
+
+.products-list1 {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 6vw, 6rem);
+}
+
+.product-item1 {
+  display: flex;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: center;
+}
+
+.product-item1.left {
+  flex-direction: row-reverse;
+}
+
+.product-item1.right {
+  flex-direction: row;
+}
+
+.product-content1 {
+  flex: 1;
+}
+
+.product-content1 h3 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 600;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  color: white;
+}
+
+.product-content1 p {
+  color: #a3a3a3;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  line-height: min(1.8, 1.6);
+  margin-bottom: clamp(1rem, 3vw, 2rem);
+  text-align: justify;
+}
+
+.product-image1 {
+  flex: 1;
+  border-radius: clamp(8px, 1.5vw, 12px);
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-image1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: clamp(8px, 1.5vw, 12px);
+  transition: transform 0.3s ease;
+}
+
+.product-image1:hover img {
+  transform: scale(1.05);
+}
+
+.learn-more-btn1 {
+  background-color: transparent;
+  color: white;
+  border: 1px solid #CC0003;
+  padding: clamp(6px, 1vw, 8px) clamp(1rem, 3vw, 24px);
+  border-radius: 50px;
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(4px, 1vw, 8px);
+  font-weight: 500;
+  min-width: max-content;
+}
+
+.learn-more-btn1:hover {
+  background-color: #CC0003;
+}
+
+@media (max-width: 1024px) {
+  .product-item1,
+  .product-item1.left,
+  .product-item1.right {
+    flex-direction: column;
+    gap: clamp(1rem, 3vw, 2rem);
+    text-align: center;
+  }
+
+  .product-content1 {
+    order: 2;
+  }
+
+  .product-image1 {
+    order: 1;
+    width: min(100%, 600px);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-content1 {
+    order: 1 !important;
+  }
+
+  .product-image1 {
+    order: 2 !important;
+  }
+
+  .product-content1 p {
+    line-height: 1.5;
+  }
+  
+  .learn-more-btn1 {
+    width: 100%;
+    justify-content: center;
+  }
+}

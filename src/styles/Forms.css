@@ -1,0 +1,160 @@
+/* Reset form container styles */
+.form-container {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .contact-form {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border-radius: 0 !important;
+  }
+  
+  /* Form message styles */
+  .form-message {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-message.success {
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid rgba(0, 255, 0, 0.2);
+    color: #00ff00;
+  }
+  
+  .form-message.error {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    color: #ff0000;
+  }
+  
+  /* Form grid styles */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-grid.mobile {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Ant Design Form Item Overrides */
+  .ant-form-item {
+    margin-bottom: 0 !important;
+  }
+  
+  .ant-form-item-explain {
+    min-height: 0 !important;
+  }
+  
+  /* Input styles */
+  .ant-input,
+  .ant-input-textarea textarea {
+    width: 100% !important;
+    padding: 0.75rem 1rem !important;
+    border: 1px solid #333 !important;
+    border-radius: 8px !important;
+    background: #0a0a0a !important;
+    color: white !important;
+    font-size: 1rem !important;
+    transition: all 0.3s ease !important;
+    min-height: 60px !important;
+    box-shadow: none !important;
+  }
+  
+  .ant-input:hover,
+  .ant-input-textarea textarea:hover {
+    border-color: #CC0003 !important;
+    background: #0a0a0a !important;
+  }
+  
+  .ant-input:focus,
+  .ant-input-textarea textarea:focus {
+    outline: none !important;
+    border-color: #CC0003 !important;
+    box-shadow: 0 0 0 2px rgba(204, 0, 3, 0.2) !important;
+    background: #0a0a0a !important;
+  }
+  
+  .ant-input::placeholder,
+  .ant-input-textarea textarea::placeholder {
+    color: #666 !important;
+  }
+  
+  /* Error styles */
+  .ant-form-item-explain-error {
+    color: #ff0000;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
+  
+  .ant-input.ant-input-status-error {
+    border-color: #ff0000 !important;
+  }
+  
+  /* Full width textarea */
+  .full-width {
+    grid-column: 1 / -1;
+  }
+  
+  /* Submit button styles */
+  .submit-btn {
+    background-color: #CC0003;
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    width: auto;
+  }
+  
+  .submit-btn:hover {
+    background-color: #a30003;
+    transform: translateY(-2px);
+  }
+  
+  .submit-btn:disabled {
+    background-color: #666;
+    cursor: not-allowed;
+    transform: none;
+  }
+  
+  /* Responsive styles */
+  @media (max-width: 1024px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  
+    .submit-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .ant-input,
+    .ant-input-textarea textarea {
+      min-height: 50px !important;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .form-grid {
+      gap: 0.75rem;
+    }
+  }

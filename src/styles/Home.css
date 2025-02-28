@@ -1,0 +1,11 @@
+.home {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow-x: hidden;
+}
+
+.home > section:not(:first-child) {
+  margin-top: 4rem;
+}

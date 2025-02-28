@@ -1,0 +1,159 @@
+.clients {
+  padding: 4vh 0;
+  background: #000000;
+  color: white;
+  overflow: hidden;
+  margin: -3vh 0 5vh;
+}
+
+.clients .section-heading-wrapper {
+  max-width: min(90%, 300px);
+  width: 100%;
+  margin: 0 auto -4vh;
+}
+
+.clients-header {
+  text-align: center;
+  margin-bottom: 6vh;
+  padding: 0 5%;
+}
+
+.clients-header h2 {
+  font-size: clamp(1.75rem, 5vw, 2.75rem);
+  font-weight: 600;
+  margin-bottom: 2vh;
+  line-height: 1.2;
+}
+
+.clients-header p {
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  color: #a3a3a3;
+  margin-bottom: 10vh;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clients-scroll-container {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.clients-track {
+  display: flex;
+  gap: clamp(2rem, 6vw, 6rem);
+  animation: scroll 40s linear infinite;
+  width: max-content;
+  padding: 0 3%;
+  will-change: transform;
+}
+
+@keyframes scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% / 3)); }
+}
+
+.client-logo {
+  flex: 0 0 clamp(120px, 20vw, 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5vh;
+  padding: 1vh 0;
+}
+
+.client-logo img {
+  width: clamp(180px, 30vw, 400px);
+  height: clamp(120px, 16vw, 220px);
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.client-logo:hover img {
+  filter: grayscale(0);
+  opacity: 1;
+}
+
+.client-name {
+  font-size: clamp(0.8rem, 1.6vw, 1rem);
+  font-weight: 500;
+  text-align: center;
+  width: 100%;
+  line-height: 1.3;
+  overflow-wrap: break-word;
+}
+
+@media (hover: hover) {
+  .clients-scroll-container:hover .clients-track {
+    animation-play-state: paused;
+  }
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+  .clients-track {
+    animation-duration: 35s;
+  }
+}
+
+@media (max-width: 768px) {
+  .clients {
+    padding: 6vh 0;
+    margin: -2vh 0 4vh;
+  }
+
+  .clients-header {
+    margin-bottom: 4vh;
+  }
+
+  .clients-track {
+    gap: clamp(1.5rem, 4vw, 3rem);
+    animation-duration: 30s;
+    padding: 0 5%;
+  }
+
+  .client-logo {
+    flex-basis: clamp(100px, 25vw, 140px);
+  }
+}
+
+@media (max-width: 480px) {
+  .clients-header p {
+    margin-bottom: 8vh;
+  }
+
+  .clients-track {
+    animation-duration: 25s;
+    gap: clamp(1rem, 3vw, 1.5rem);
+  }
+
+  .client-logo img {
+    height: clamp(75px, 12vw, 90px);
+  }
+
+  .client-name {
+    font-size: clamp(0.7rem, 3vw, 0.8rem);
+  }
+}
+
+/* Orientation-specific adjustments */
+@media (orientation: portrait) {
+  .clients-track {
+    animation-duration: 28s;
+  }
+}
+
+/* 2K+ Screens */
+@media (min-width: 1920px) {
+  .clients {
+    padding: 6vh 0;
+  }
+
+  .clients-track {
+    animation-duration: 45s;
+  }
+}

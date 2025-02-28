@@ -1,0 +1,170 @@
+import { Form, Input } from "antd";
+import { useEffect, useState, useRef } from "react";
+import emailjs from '@emailjs/browser';
+import { CheckCircle2, AlertCircle } from 'lucide-react';
+import '../styles/Forms.css';
+
+const SubmitForm = () => {
+    const [form] = Form.useForm();
+    const formRef = useRef<HTMLFormElement>(null);
+    const [is_mobile_width, set_is_mobile_width] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
+    const [submitError, setSubmitError] = useState(false);
+    const [errorDetails, setErrorDetails] = useState("");
+
+    // EmailJS configuration constants - update these with your actual values
+    const SERVICE_ID = "service_or2x7is";
+    const TEMPLATE_ID = "template_a4lg6ec";
+    const PUBLIC_KEY = "bsLmN2eoIBfPbZU5m";
+
+    useEffect(() => {
+        const handleResize = () => {
+            set_is_mobile_width(window.innerWidth < 768);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const handleSubmit = (values: any) => {
+        if (!formRef.current) return;
+
+        setIsSubmitting(true);
+        setSubmitError(false);
+        setSubmitted(false);
+        setErrorDetails("");
+
+        // EmailJS requires a specific format for sendForm
+        // First add all form values as data attributes to the form
+        Object.entries(values).forEach(([key, value]) => {
+            // Using a hidden input approach to ensure values are sent properly
+            const inputField = document.createElement('input');
+            inputField.type = 'hidden';
+            inputField.name = key;
+            inputField.value = value as string;
+            formRef.current?.appendChild(inputField);
+        });
+
+        // Log the final form state before sending
+        console.log("Form being submitted:", formRef.current);
+        console.log("Form values:", values);
+        
+        // Use the recommended sendForm method directly from @emailjs/browser
+        emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, formRef.current, PUBLIC_KEY)
+            .then((result) => {
+                console.log('Email successfully sent!', result.text);
+                setSubmitted(true);
+                form.resetFields();
+                
+                // Clean up hidden fields to prevent duplicates on future submissions
+                const hiddenFields = formRef.current?.querySelectorAll('input[type="hidden"]');
+                hiddenFields?.forEach(field => field.remove());
+            })
+            .catch((error) => {
+                console.error('Failed to send email:', error);
+                setSubmitError(true);
+                setErrorDetails(error.text || "Unknown error occurred");
+                
+                // Clean up hidden fields even on error
+                const hiddenFields = formRef.current?.querySelectorAll('input[type="hidden"]');
+                hiddenFields?.forEach(field => field.remove());
+            })
+            .finally(() => {
+                setIsSubmitting(false);
+            });
+    };
+
+    return (
+        <div>
+            {/* EmailJS debug information - remove in production */}
+            <div style={{ display: 'none' }}>
+                <h4>EmailJS Configuration:</h4>
+                <p>Service ID: {SERVICE_ID}</p>
+                <p>Template ID: {TEMPLATE_ID}</p>
+                <p>Public Key: {PUBLIC_KEY.substring(0, 4)}...{PUBLIC_KEY.substring(PUBLIC_KEY.length-4)}</p>
+            </div>
+
+            <Form
+                form={form}
+                onFinish={handleSubmit}
+                className="contact-form"
+                ref={formRef as any}
+            >
+                {submitted && (
+                    <div className="form-message success">
+                        <CheckCircle2 size={20} />
+                        <p>Thank you for your message! We'll get back to you soon.</p>
+                    </div>
+                )}
+
+                {submitError && (
+                    <div className="form-message error">
+                        <AlertCircle size={20} />
+                        <p>There was an error sending your message. Please try again.</p>
+                        <p style={{ fontSize: '12px', marginTop: '5px' }}>{errorDetails}</p>
+                    </div>
+                )}
+
+                <div className={`form-grid ${is_mobile_width ? 'mobile' : ''}`}>
+                    <Form.Item
+                        name="user_name"
+                        rules={[{ required: true, message: "Please enter your full name" }]}
+                    >
+                        <Input placeholder="Your Full Name" id="user_name" name="user_name" />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="user_email"
+                        rules={[
+                            { required: true, message: "Please enter your email address" },
+                            { type: 'email', message: "Please enter a valid email address" }
+                        ]}
+                    >
+                        <Input placeholder="Your Email Address" id="user_email" name="user_email" />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="phone"
+                        rules={[{ required: true, message: "Please enter your phone number" }]}
+                    >
+                        <Input placeholder="Your Phone Number" id="phone" name="phone" />
+                    </Form.Item>
+
+                    <Form.Item
+                        name="address"
+                        rules={[{ required: true, message: "Please enter your address" }]}
+                    >
+                        <Input placeholder="Your Address" id="address" name="address" />
+                    </Form.Item>
+
+                    <Form.Item 
+                        name="message"
+                        className="full-width"
+                        rules={[{ required: true, message: "Please enter your message" }]}
+                    >
+                        <Input.TextArea 
+                            rows={5} 
+                            placeholder="Your Message" 
+                            id="message"
+                            name="message"
+                        />
+                    </Form.Item>
+                </div>
+
+                <Form.Item>
+                    <button 
+                        type="submit" 
+                        className="submit-btn"
+                        disabled={isSubmitting}
+                    >
+                        {isSubmitting ? 'Sending...' : 'Send Message'}
+                    </button>
+                </Form.Item>
+            </Form>
+        </div>
+    );
+};
+
+export default SubmitForm;
