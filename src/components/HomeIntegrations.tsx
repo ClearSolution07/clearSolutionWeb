@@ -105,14 +105,22 @@ const HomeIntegrations = () => {
         let newWidth = 1200;
         let newHeight = 800;
 
-        if (width <= 480) {
-          newScale = 0.6;
+        if (width <= 360) {
+          newScale = 0.75;
           newWidth = 400;
+          newHeight = 450;
+        } else if (width <= 480) {
+          newScale = 0.85;
+          newWidth = 500;
+          newHeight = 500;
+        } else if (width <= 640) {
+          newScale = 0.8;
+          newWidth = 600;
           newHeight = 500;
         } else if (width <= 768) {
           newScale = 0.8;
           newWidth = 600;
-          newHeight = 600;
+          newHeight = 500;
         } else if (width <= 1024) {
           newScale = 0.9;
           newWidth = 900;
