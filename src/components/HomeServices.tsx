@@ -45,7 +45,7 @@ const HomeServices = () => {
     {
       title: "AI Solutions",
       description: "Implement cutting-edge artificial intelligence solutions to automate and optimize your business processes.",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad095?q=80&w=2070&auto=format&fit=crop"
+      image: "https://d2xd1xgy7uhqas.cloudfront.net/NapaGlobal-image/67a02fc97e6f36c3b92c89d0-CUSTOM%20AI%20SOLUTION%20-%206.1.25.png"
     },
     {
       title: "Cybersecurity",

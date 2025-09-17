@@ -129,6 +129,8 @@
   gap: 12px;
   cursor: pointer;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .icon-label {
@@ -149,7 +151,8 @@
   transition: all 0.4s ease;
 }
 
-.integration-icon:hover {
+.integration-icon:hover,
+.integration-icon:active {
   transform: translate(-50%, -50%) translateY(-8px) scale(1.05);
   background: rgba(26, 26, 26, 1);
   border-color: rgba(204, 0, 3, 0.6);
@@ -158,16 +161,19 @@
     0 0 60px rgba(204, 0, 3, 0.15);
 }
 
-.integration-icon:hover .icon-label {
+.integration-icon:hover .icon-label,
+.integration-icon:active .icon-label {
   color: #ffffff;
 }
 
-.integration-icon:hover .icon-glow {
+.integration-icon:hover .icon-glow,
+.integration-icon:active .icon-glow {
   opacity: 1;
   transform: scale(1.2);
 }
 
-.integration-icon:hover ~ .connections .connection-line {
+.integration-icon:hover ~ .connections .connection-line,
+.integration-icon:active ~ .connections .connection-line {
   opacity: 0.9;
   stroke-width: 2;
   animation: flowLine 1.5s infinite;
@@ -296,10 +302,16 @@
 @media (max-width: 768px) {
   .home-integrations {
     padding: 2.5rem 1rem;
+    min-height: auto;
+  }
+
+  .home-integrations .section-heading-wrapper {
+    margin-bottom: -4rem;
   }
 
   .integrations-content h2 {
     font-size: 2rem;
+    line-height: 1.2;
   }
 
   .integrations-content p {
@@ -307,11 +319,60 @@
     font-size: 1rem;
     margin-bottom: 2.5rem;
     max-width: 500px;
+    line-height: 1.6;
   }
 
   .integrations-grid {
     height: 500px;
     max-width: 650px;
+    transform: scale(0.8);
+    transform-origin: center center;
+  }
+
+  .integration-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    gap: 10px;
+  }
+
+  .integration-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+  .icon-label {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .integration-glow {
+    width: 500px;
+    height: 500px;
+  }
+
+  .connection-line {
+    stroke-width: 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-integrations {
+    padding: 2.5rem 1rem;
+  }
+
+  .integrations-content h2 {
+    font-size: 2rem;
+  }
+
+  .integrations-content p {
+    font-size: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .integrations-grid {
+    height: 500px;
+    max-width: 100%;
     transform: scale(0.8);
   }
 
@@ -331,8 +392,66 @@
   }
 
   .integration-glow {
-    width: 500px;
+    width: 450px;
+    height: 450px;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-integrations {
+    padding: 2rem 1rem;
+    min-height: auto;
+  }
+
+  .home-integrations .section-heading-wrapper {
+    max-width: 100%;
+    margin-bottom: -2rem;
+  }
+
+  .integrations-content {
+    padding: 1.5rem 0;
+  }
+
+  .integrations-content h2 {
+    font-size: 1.8rem;
+    line-height: 1.3;
+    margin: 1.5rem 0;
+  }
+
+  .integrations-content p {
+    font-size: 0.95rem;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+    line-height: 1.5;
+  }
+
+  .integrations-grid {
     height: 500px;
+    max-width: 100%;
+    transform: scale(0.85);
+    transform-origin: center center;
+  }
+
+  .integration-icon {
+    width: 90px;
+    height: 90px;
+    border-radius: 18px;
+    gap: 10px;
+  }
+
+  .integration-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .icon-label {
+    font-size: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .integration-glow {
+    width: 400px;
+    height: 400px;
   }
 
   .connection-line {
@@ -340,29 +459,31 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 360px) {
   .home-integrations {
-    padding: 2rem 0.5rem;
+    padding: 1.5rem 0.5rem;
   }
 
   .integrations-content h2 {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
   }
 
   .integrations-content p {
-    font-size: 0.9rem;
-    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
   }
 
   .integrations-grid {
-    height: 500px;
+    height: 450px;
+    transform: scale(0.75);
   }
 
   .integration-icon {
     width: 80px;
     height: 80px;
-    top: calc(50% - 40px); /* Adjusting vertical position */
-    left: calc(50% - 40px); /* Adjusting horizontal position */
+    border-radius: 16px;
+    gap: 8px;
+    min-height: 44px; /* Minimum touch target size */
   }
 
   .integration-icon svg {
@@ -375,11 +496,28 @@
   }
 
   .integration-glow {
-    width: 400px;
-    height: 400px;
+    width: 350px;
+    height: 350px;
   }
+}
 
-  .connection-line {
-    stroke-width: 2;
+/* Additional mobile optimizations */
+@media (max-width: 768px) {
+  .integration-icon {
+    min-height: 44px; /* Ensure minimum touch target size */
+  }
+  
+  .integration-icon:active {
+    transform: translate(-50%, -50%) translateY(-4px) scale(1.02);
+  }
+}
+
+/* Prevent text selection on mobile */
+@media (max-width: 768px) {
+  .integration-icon {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 }
